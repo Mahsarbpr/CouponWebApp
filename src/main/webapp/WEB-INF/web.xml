@@ -35,4 +35,14 @@
     <servlet-name>ValidationCheck</servlet-name>
     <url-pattern>/ValidationCheck</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AvailableCByItem</display-name>
+    <servlet-name>AvailableCByItem</servlet-name>
+    <servlet-class>couponModel.AvailableCByItem</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AvailableCByItem</servlet-name>
+    <url-pattern>/AvailableCByItem</url-pattern>
+  </servlet-mapping>
 </web-app>
