@@ -58,7 +58,7 @@ public class ValidationCheck extends HttpServlet {
 			request.setAttribute("coid", vId);
 			request.setAttribute("message", "valid"); // Will be available as ${message}
 			request.setAttribute("expiration", Cdate2);//dateFormat.format(Cdate2));
-			request.getRequestDispatcher("validation.jsp").forward(request,response);
+			request.getRequestDispatcher("CWACvalidatecoupon.jsp").forward(request,response);
 			
 			//out.println("valid coupon");
 		}
@@ -66,7 +66,7 @@ public class ValidationCheck extends HttpServlet {
 			request.setAttribute("coid", vId);
 			request.setAttribute("message", "Expired"); // Will be available as ${message}
 			request.setAttribute("expiration", Cdate2);
-			request.getRequestDispatcher("validation.jsp").forward(request,response);
+			request.getRequestDispatcher("CWACvalidatecoupon.jsp").forward(request,response);
 //			out.println("not valid coupon");
 		}
 		}

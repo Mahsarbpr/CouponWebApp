@@ -40,7 +40,7 @@ public class ReadCouponServlet extends HttpServlet {
 		request.setAttribute("in",cc.Itemname);
 		request.setAttribute("ti1", cc.getValidTime1());//dateFormat.format(Cdate2));
 		request.setAttribute("ti2", cc.getValidTime2());
-		request.getRequestDispatcher("ReadCoupon.jsp").forward(request,response);   
+		request.getRequestDispatcher("CWACreadcoupon.jsp").forward(request,response);   
         
 	}
 		else {
