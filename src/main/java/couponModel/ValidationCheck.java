@@ -46,30 +46,41 @@ public class ValidationCheck extends HttpServlet {
 		int iVId= Integer.parseInt(vId);
 		Client client= ClientBuilder.newClient();
 		Coupon vcc=client.target("http://localhost:8080/coupon-webservice/webapi/myresource/gettime").queryParam("var",iVId).request().get(Coupon.class);
-		
-		Date Cdate1= vcc.getValidTime1();
-		Date Cdate2= vcc.getValidTime2();
-		PrintWriter out = response.getWriter();
-		//if(Cdate1 != null && Cdate2 != null){
-		//out.println(date);
-		//out.println(Cdate1.compareTo(date));
-		//out.println(Cdate2.compareTo(date));
-		if((Cdate1.compareTo(date)<=0) && (Cdate2.compareTo(date)>=0) ){
-			request.setAttribute("coid", vId);
-			request.setAttribute("message", "valid"); // Will be available as ${message}
-			request.setAttribute("expiration", Cdate2);//dateFormat.format(Cdate2));
-			request.getRequestDispatcher("CWACvalidatecoupon.jsp").forward(request,response);
+		if(vcc.getValidTime1() != null){
+	//		request.setAttribute("coid", vId);
+		//	request.setAttribute("message", "There is no coupon with this information."); // Will be available as ${message}
+			//request.getRequestDispatcher("CWACvalidatecoupon.jsp").forward(request,response);
+		//}
+			Date Cdate1= vcc.getValidTime1();
+			Date Cdate2= vcc.getValidTime2();
+			PrintWriter out = response.getWriter();
+			//if(Cdate1 != null && Cdate2 != null){
+			//out.println(date);
+			//out.println(Cdate1.compareTo(date));
+			//out.println(Cdate2.compareTo(date));
+			if((Cdate1.compareTo(date)<=0) && (Cdate2.compareTo(date)>=0) ){
+				request.setAttribute("coid", vId);
+				request.setAttribute("message", "valid"); // Will be available as ${message}
+				request.setAttribute("expiration", Cdate2);//dateFormat.format(Cdate2));
+				request.getRequestDispatcher("CWAvalidatecoupon.jsp").forward(request,response);
 			
 			//out.println("valid coupon");
+			}
+			else{
+			//if((Cdate1.compareTo(date)>0) && (Cdate2.compareTo(date)<0) ){
+				request.setAttribute("coid", vId);
+				request.setAttribute("message", "Expired"); // Will be available as ${message}
+				request.setAttribute("expiration", Cdate2);
+				request.getRequestDispatcher("CWAvalidatecoupon.jsp").forward(request,response);
+				//			out.println("not valid coupon");
+			}}
+			else{
+				request.setAttribute("coid", vId);
+				request.setAttribute("message", "There is no coupon with this information."); // Will be available as ${message}
+				request.getRequestDispatcher("CWAvalidatecoupon.jsp").forward(request,response);
+			}
 		}
-		else{
-			request.setAttribute("coid", vId);
-			request.setAttribute("message", "Expired"); // Will be available as ${message}
-			request.setAttribute("expiration", Cdate2);
-			request.getRequestDispatcher("CWACvalidatecoupon.jsp").forward(request,response);
-//			out.println("not valid coupon");
-		}
-		}
+		//}
 		else{
 			System.out.println("errooor");
 		}	
